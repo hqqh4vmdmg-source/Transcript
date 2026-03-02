@@ -43,3 +43,6 @@ Thumbs.db
 
 # Temporary test files
 tmp/
+
+# Generated seal images
+server/public/seals/
