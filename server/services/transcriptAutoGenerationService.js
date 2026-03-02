@@ -179,7 +179,7 @@ class TranscriptAutoGenerationService {
   generateRepeatNotation(courses) {
     const courseMap = {};
     courses.forEach(c => {
-      const key = c.courseNumber || c.courseName;
+      const key = c.courseNumber || c.code || c.courseName || c.name;
       if (!courseMap[key]) courseMap[key] = [];
       courseMap[key].push(c);
     });
@@ -196,13 +196,13 @@ class TranscriptAutoGenerationService {
     if (!policy.replaceWithHighest) return courses;
     const courseMap = {};
     courses.forEach(c => {
-      const key = c.courseNumber || c.courseName;
-      if (!courseMap[key] || (parseFloat(c.gradePoints) > parseFloat(courseMap[key].gradePoints))) {
+      const key = c.courseNumber || c.code || c.courseName || c.name;
+      if (!courseMap[key] || (parseFloat(c.gradePoints || c.qualityPoints) > parseFloat((courseMap[key].gradePoints || courseMap[key].qualityPoints)))) {
         courseMap[key] = c;
       }
     });
     return courses.map(c => {
-      const key = c.courseNumber || c.courseName;
+      const key = c.courseNumber || c.code || c.courseName || c.name;
       const best = courseMap[key];
       return c === best ? c : { ...c, forgivenGrade: true, excludedFromGPA: true, notation: 'Grade Forgiveness Applied' };
     });
