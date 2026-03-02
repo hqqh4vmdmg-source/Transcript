@@ -22,7 +22,7 @@ class GPAAutomationService {
     let totalQP = 0, totalAttempted = 0;
     gradable.forEach(c => {
       const pts = scale[c.grade] !== undefined ? scale[c.grade] : 0;
-      const hrs = parseFloat(c.creditHours) || 0;
+      const hrs = parseFloat(c.creditHours ?? c.credits) || 0;
       totalQP += pts * hrs;
       totalAttempted += hrs;
     });
@@ -51,7 +51,7 @@ class GPAAutomationService {
     let attempted = 0, earned = 0;
     courses.forEach(c => {
       if (!['AU', 'audit'].includes(c.gradeMode)) {
-        const hrs = parseFloat(c.creditHours) || 0;
+        const hrs = parseFloat(c.creditHours ?? c.credits) || 0;
         attempted += hrs;
         if (!['F', 'W', 'WF', 'I'].includes(c.grade)) earned += hrs;
       }
@@ -64,7 +64,7 @@ class GPAAutomationService {
     const scale = this.defaultGradingScales[scaleType] || this.defaultGradingScales['4.0'];
     return courses.map(c => {
       const pts = scale[c.grade] || 0;
-      const hrs = parseFloat(c.creditHours) || 0;
+      const hrs = parseFloat(c.creditHours ?? c.credits) || 0;
       return { ...c, qualityPoints: parseFloat((pts * hrs).toFixed(3)), gradePoints: pts };
     });
   }
@@ -139,7 +139,7 @@ class GPAAutomationService {
     return courses.map(c => {
       if (c.gradeMode === 'pass_fail') {
         const pass = !['F', 'NP', 'U'].includes(c.grade);
-        return { ...c, displayGrade: pass ? 'P' : 'NP', excludedFromGPA: true, creditsEarned: pass ? (parseFloat(c.creditHours) || 0) : 0 };
+        return { ...c, displayGrade: pass ? 'P' : 'NP', excludedFromGPA: true, creditsEarned: pass ? (parseFloat(c.creditHours ?? c.credits) || 0) : 0 };
       }
       return c;
     });
@@ -157,7 +157,7 @@ class GPAAutomationService {
   // Feature 46: Auto-calculate credits in progress
   calculateInProgressCredits(courses) {
     const inProgress = courses.filter(c => c.grade === 'IP' || c.status === 'in_progress');
-    return { count: inProgress.length, credits: inProgress.reduce((t, c) => t + (parseFloat(c.creditHours) || 0), 0), courses: inProgress };
+    return { count: inProgress.length, credits: inProgress.reduce((t, c) => t + (parseFloat(c.creditHours ?? c.credits) || 0), 0), courses: inProgress };
   }
 
   // Feature 47: Auto-generate total credits required vs earned

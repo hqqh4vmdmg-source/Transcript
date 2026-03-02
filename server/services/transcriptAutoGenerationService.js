@@ -82,7 +82,7 @@ class TranscriptAutoGenerationService {
   calculateCumulativeCredits(courses) {
     return courses.reduce((total, course) => {
       if (course.gradeMode !== 'audit' && !['W', 'WF'].includes(course.grade)) {
-        return total + (parseFloat(course.creditHours) || 0);
+        return total + (parseFloat(course.creditHours ?? course.credits) || 0);
       }
       return total;
     }, 0);
