@@ -276,7 +276,7 @@ ${institutionName}`,
     if (format === 'csv') {
       const courses = transcriptData?.courses || [];
       const headers = ['Term', 'Course Number', 'Course Name', 'Credits', 'Grade', 'Quality Points'];
-      const rows = courses.map(c => [c.term || '', c.courseNumber || '', c.courseName || '', c.creditHours || '', c.grade || '', c.qualityPoints || '']);
+      const rows = courses.map(c => [c.term || '', c.courseNumber || c.code || '', c.courseName || c.name || '', c.creditHours || c.credits || '', c.grade || '', c.qualityPoints || '']);
       const csv = [headers, ...rows].map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
       return { format: 'csv', content: csv, filename: `transcript-export-${Date.now()}.csv`, contentType: 'text/csv' };
     }
