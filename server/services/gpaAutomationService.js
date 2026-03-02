@@ -99,12 +99,12 @@ class GPAAutomationService {
   applyGradeReplacement(courses, _rule = 'highest') {
     const seen = {};
     courses.forEach(c => {
-      const key = c.courseNumber || c.courseName;
+      const key = c.courseNumber || c.code || c.courseName || c.name;
       if (!seen[key]) seen[key] = [];
       seen[key].push(c);
     });
     return courses.map(c => {
-      const key = c.courseNumber || c.courseName;
+      const key = c.courseNumber || c.code || c.courseName || c.name;
       const attempts = seen[key];
       if (attempts.length <= 1) return c;
       const best = attempts.reduce((prev, cur) => (parseFloat(cur.gradePoints) > parseFloat(prev.gradePoints) ? cur : prev));
@@ -114,7 +114,7 @@ class GPAAutomationService {
 
   // Feature 41: Auto-calculate major GPA
   calculateMajorGPA(courses, majorDepartment, scaleType = '4.0') {
-    const majorCourses = courses.filter(c => c.department === majorDepartment || (c.courseNumber || '').startsWith(majorDepartment));
+    const majorCourses = courses.filter(c => c.department === majorDepartment || (c.courseNumber || c.code || '').startsWith(majorDepartment));
     return { majorGPA: this.formatGPA(this.calculateTermGPA(majorCourses, scaleType), 3), courseCount: majorCourses.length, majorDepartment };
   }
 
