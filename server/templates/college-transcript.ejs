@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official College Transcript</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; color: #111; background: #fff; padding: 36px 48px; }
+    .page-border { border: 3px double #222; padding: 18px; min-height: 90vh; }
+
+    /* Header */
+    .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 14px; margin-bottom: 18px; }
+    .header h1 { font-size: 20pt; letter-spacing: 1px; }
+    .header h2 { font-size: 13pt; font-weight: normal; margin-top: 4px; }
+    .header .address { font-size: 9.5pt; color: #444; margin-top: 4px; }
+    .header .doc-title { font-size: 13pt; font-weight: bold; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
+
+    /* Student info */
+    .student-section { margin-bottom: 18px; }
+    .student-section h3 { font-size: 11pt; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #555; margin-bottom: 8px; padding-bottom: 3px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+    .info-row { display: flex; gap: 6px; font-size: 10.5pt; }
+    .info-label { font-weight: bold; min-width: 150px; }
+
+    /* Summary bar */
+    .summary { display: flex; gap: 30px; background: #f0f0f0; border: 1px solid #bbb; padding: 10px 16px; margin-bottom: 18px; font-size: 10.5pt; }
+    .summary-item { display: flex; flex-direction: column; align-items: center; }
+    .summary-item .label { font-size: 8.5pt; text-transform: uppercase; color: #555; }
+    .summary-item .value { font-size: 14pt; font-weight: bold; color: #222; }
+
+    /* Courses */
+    .courses-section { margin-bottom: 18px; }
+    .courses-section h3 { font-size: 11pt; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #555; margin-bottom: 8px; padding-bottom: 3px; }
+    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+    th { background: #ddd; border: 1px solid #888; padding: 6px 8px; text-align: center; font-weight: bold; font-size: 9.5pt; text-transform: uppercase; }
+    td { border: 1px solid #aaa; padding: 5px 8px; }
+    tr:nth-child(even) td { background: #f7f7f7; }
+    .no-courses { text-align: center; color: #666; padding: 12px; font-style: italic; }
+
+    /* Footer */
+    .footer { margin-top: 30px; border-top: 1.5px solid #333; padding-top: 14px; }
+    .sig-row { display: flex; justify-content: space-between; margin-top: 40px; }
+    .sig-block { width: 42%; }
+    .sig-line { border-top: 1px solid #333; padding-top: 5px; text-align: center; font-size: 9.5pt; }
+
+    /* Seal */
+    .seal-section { text-align: center; margin-top: 20px; }
+    .seal-image { max-width: 120px; max-height: 120px; opacity: 0.85; }
+    .seal-name { font-size: 9pt; font-style: italic; margin-top: 4px; }
+
+    /* Verification */
+    .verification { margin-top: 18px; padding: 10px; border: 1px solid #ccc; background: #fafafa; text-align: center; font-size: 9pt; }
+    .verification img { max-width: 80px; max-height: 80px; margin: 6px auto; display: block; }
+    .ver-code { font-family: 'Courier New', monospace; font-weight: bold; margin-top: 4px; letter-spacing: 1px; }
+
+    .watermark { position: fixed; bottom: 60px; right: 60px; font-size: 60pt; color: rgba(0,0,0,0.04); transform: rotate(-30deg); pointer-events: none; z-index: 0; }
+  </style>
+</head>
+<body>
+  <div class="page-border">
+    <div class="watermark">OFFICIAL</div>
+
+    <!-- Header -->
+    <div class="header">
+      <h1><%- transcript.data.schoolName || 'College / University' %></h1>
+      <% if (transcript.data.schoolAddress) { %>
+        <div class="address"><%- transcript.data.schoolAddress %></div>
+      <% } %>
+      <div class="doc-title">Official Academic Transcript</div>
+      <h2>Undergraduate / Graduate Record</h2>
+    </div>
+
+    <!-- Student Information -->
+    <div class="student-section">
+      <h3>Student Information</h3>
+      <div class="info-grid">
+        <div class="info-row"><span class="info-label">Student Name:</span><span><%- transcript.data.studentName || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Student ID:</span><span><%- transcript.data.studentId || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Date of Birth:</span><span><%- transcript.data.dateOfBirth || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Major:</span><span><%- transcript.data.major || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Degree Program:</span><span><%- transcript.data.degree || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Expected Graduation:</span><span><%- transcript.data.expectedGraduation || 'N/A' %></span></div>
+        <div class="info-row"><span class="info-label">Cumulative GPA:</span><span><%- transcript.data.cumulativeGPA || 'N/A' %></span></div>
+      </div>
+    </div>
+
+    <!-- Summary bar -->
+    <% const totalCredits = (transcript.courses || []).reduce(function(s, c) { return s + (parseInt(c.credits) || 0); }, 0); %>
+    <div class="summary">
+      <div class="summary-item"><span class="label">Total Credits</span><span class="value"><%= totalCredits %></span></div>
+      <div class="summary-item"><span class="label">GPA</span><span class="value"><%= transcript.data.cumulativeGPA || '—' %></span></div>
+      <div class="summary-item"><span class="label">Degree</span><span class="value" style="font-size:10pt;"><%= transcript.data.degree || '—' %></span></div>
+      <div class="summary-item"><span class="label">Major</span><span class="value" style="font-size:10pt;"><%= transcript.data.major || '—' %></span></div>
+      <div class="summary-item"><span class="label">Transcript Date</span><span class="value" style="font-size:10pt;"><%= new Date().toLocaleDateString() %></span></div>
+    </div>
+
+    <!-- Courses -->
+    <div class="courses-section">
+      <h3>Academic Record</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Semester / Year</th>
+            <th>Credits</th>
+            <th>Grade</th>
+            <th>Professor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (transcript.courses && transcript.courses.length > 0) { %>
+            <% transcript.courses.forEach(function(course) { %>
+              <tr>
+                <td><%- course.code %></td>
+                <td><%- course.name %></td>
+                <td><%- course.semester_year %></td>
+                <td style="text-align:center;"><%- course.credits %></td>
+                <td style="text-align:center;font-weight:bold;"><%- course.grade %></td>
+                <td><%- course.teacher_professor %></td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr><td colspan="6" class="no-courses">No courses recorded</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p style="font-size:9pt;color:#555;">This is an official transcript issued by <%- transcript.data.schoolName || 'the institution' %>. Unauthorized alterations invalidate this document.</p>
+
+      <div class="sig-row">
+        <div class="sig-block">
+          <div class="sig-line">University Registrar Signature</div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-line">Date Issued: <%= new Date().toLocaleDateString() %></div>
+        </div>
+      </div>
+
+      <% if (seal) { %>
+        <div class="seal-section">
+          <% if (seal.image_data) { %>
+            <% const ext = (seal.image_path || '').split('.').pop().toLowerCase(); %>
+            <% const mime = {png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',svg:'image/svg+xml',gif:'image/gif',webp:'image/webp'}[ext] || 'image/png'; %>
+            <img src="data:<%= mime %>;base64,<%= Buffer.from(seal.image_data).toString('base64') %>" alt="Official Seal" class="seal-image" />
+          <% } %>
+          <div class="seal-name"><%= seal.name %></div>
+        </div>
+      <% } %>
+
+      <% if (qrCode && verificationCode) { %>
+        <div class="verification">
+          <strong>Document Verification</strong>
+          <img src="<%= qrCode %>" alt="Verification QR Code" />
+          <div class="ver-code">Verification Code: <%= verificationCode %></div>
+          <div>Scan QR code to verify the authenticity of this transcript</div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

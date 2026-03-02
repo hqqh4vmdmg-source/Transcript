@@ -1,0 +1,153 @@
+.contact-page {
+  min-height: calc(100vh - 200px);
+}
+
+.contact-hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.contact-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-hero p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.contact-info-section h2,
+.contact-form-section h2 {
+  color: #1a1a2e;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #4ecca3;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-detail {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.contact-detail h3 {
+  color: #1a1a2e;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-detail p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4ecca3;
+  box-shadow: 0 0 0 3px rgba(78, 204, 163, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn--primary {
+  background-color: #4ecca3;
+  color: white;
+}
+
+.btn--primary:hover {
+  background-color: #45b393;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(78, 204, 163, 0.3);
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #c3e6cb;
+}
+
+@media (max-width: 768px) {
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-detail {
+    gap: 1rem;
+  }
+
+  .contact-icon {
+    font-size: 2rem;
+  }
+}

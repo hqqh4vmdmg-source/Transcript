@@ -1,0 +1,174 @@
+.header {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header__logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4ecca3;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.header__logo a:hover {
+  color: #45b393;
+}
+
+.header__nav {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.header__nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.header__nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__toggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle__label {
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle__slider {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #4ecca3;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle__slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle input:checked + .toggle__slider::after {
+  transform: translateX(26px);
+}
+
+.toggle input:checked + .toggle__slider {
+  background-color: #ee6f57;
+}
+
+.header__user,
+.header__auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__username {
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.header__btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.header__btn--login {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.header__btn--login:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header__btn--profile {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.header__btn--profile:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.header__btn--register,
+.header__btn--logout {
+  background-color: #4ecca3;
+  color: #1a1a2e;
+}
+
+.header__btn--register:hover,
+.header__btn--logout:hover {
+  background-color: #45b393;
+}
+
+@media (max-width: 768px) {
+  .header__container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header__nav {
+    gap: 1rem;
+  }
+
+  .header__toggle {
+    margin-top: 0.5rem;
+  }
+}

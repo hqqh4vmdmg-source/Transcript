@@ -1,0 +1,51 @@
+{
+  "name": "transcript-generator",
+  "version": "1.0.0",
+  "description": "High School/College Transcript Generator Website",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "test": "npm run test:server && npm run test:client",
+    "test:server": "cd server && npm test",
+    "test:client": "cd client && npm test -- --watchAll=false",
+    "test:e2e": "playwright test",
+    "lint": "npm run lint:server && npm run lint:client",
+    "lint:server": "cd server && npm run lint",
+    "lint:client": "cd client && npm run lint",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,json,md}\"",
+    "docker:build": "docker build -t transcript-generator .",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "migrate:up": "cd server && npm run migrate:up",
+    "migrate:down": "cd server && npm run migrate:down",
+    "backup": "bash scripts/backup.sh",
+    "health": "bash scripts/health-check.sh",
+    "prepare": "husky || true"
+  },
+  "keywords": [
+    "transcript",
+    "generator",
+    "education",
+    "automated",
+    "comprehensive"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "@playwright/test": "^1.58.2"
+  }
+}
