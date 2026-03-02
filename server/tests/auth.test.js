@@ -131,8 +131,8 @@ describe('Authentication API Tests', () => {
     
     beforeAll(async () => {
       const userData = {
-        username: 'profiletest',
-        email: 'profiletest@example.com',
+        username: 'profiletest' + Date.now(),
+        email: `profiletest${Date.now()}@example.com`,
         password: 'Test123456!'
       };
 

@@ -58,8 +58,8 @@ class TranscriptLayoutService {
         { key: 'notation', label: 'Notes', width: '10%', align: 'left' }
       ],
       rows: courses.map(c => ({
-        courseNumber: c.courseNumber || '',
-        courseName: c.courseName || '',
+        courseNumber: c.courseNumber || c.code || '',
+        courseName: c.courseName || c.name || '',
         creditHours: c.creditHours || c.credits || '',
         grade: c.displayGrade || c.grade || '',
         qualityPoints: c.qualityPoints !== undefined ? c.qualityPoints : '',
