@@ -422,7 +422,7 @@ const academicService = {
 
   /** Export transcript data as a file download (JSON/CSV) */
   downloadTranscriptExport: async (token, transcriptData, format = 'json') => {
-    const response = await axios.post(`${API_URL}/import/json`, { transcriptData, format }, {
+    const response = await axios.post(`${API_URL}/export/data`, { transcriptData, format }, {
       headers: { Authorization: `Bearer ${token}` },
       responseType: 'blob'
     });
