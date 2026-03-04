@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import authService from '../services/authService';
@@ -15,11 +15,11 @@ const ProfilePage = () => {
   const [passwordLoading, setPasswordLoading] = useState(false);
 
   // Populate form with current user data once loaded
-  const [initialized, setInitialized] = useState(false);
-  if (user && !initialized) {
-    setProfileForm({ username: user.username || '', email: user.email || '' });
-    setInitialized(true);
-  }
+  useEffect(() => {
+    if (user) {
+      setProfileForm({ username: user.username || '', email: user.email || '' });
+    }
+  }, [user]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (!token) return <Navigate to="/login" />;
