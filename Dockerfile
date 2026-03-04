@@ -10,9 +10,9 @@ COPY client/package*.json ./client/
 COPY server/package*.json ./server/
 
 # Install dependencies
-RUN npm ci --only=production && \
-    cd client && npm ci --only=production && \
-    cd ../server && npm ci --only=production
+RUN npm ci --omit=dev && \
+    cd client && npm ci --omit=dev && \
+    cd ../server && npm ci --omit=dev
 
 # Copy source code
 COPY client ./client
