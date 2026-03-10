@@ -18,8 +18,8 @@ Supporting directories:
 
 ```bash
 # Install all dependencies (skip Puppeteer download in sandboxed/CI envs)
-cd server && PUPPETEER_SKIP_DOWNLOAD=true npm install
-cd ../client && npm install
+(cd server && PUPPETEER_SKIP_DOWNLOAD=true npm install)
+(cd client && npm install)
 
 # Copy environment template and fill in values before starting
 cp server/.env.example server/.env
@@ -46,19 +46,19 @@ Always validate changes before pushing. Run these from the repo root:
 
 ```bash
 # Server ESLint (flat config in server/eslint.config.js)
-cd server && npm run lint
+(cd server && npm run lint)
 
 # Server tests (Jest + Supertest — requires PostgreSQL running)
-cd server && npm test
+(cd server && npm test)
 
 # Quick server smoke-check (no DB needed — validates require tree)
-cd server && node -e "require('./app')"
+(cd server && node -e "require('./app')")
 
 # Client tests (React Testing Library)
-cd client && CI=true npm test -- --watchAll=false
+(cd client && CI=true npm test -- --watchAll=false)
 
 # Client production build (must produce zero warnings)
-cd client && CI=true npm run build
+(cd client && CI=true npm run build)
 
 # Prettier format check (from repo root)
 npm run format:check
@@ -145,7 +145,7 @@ Routes mounted in `server/app.js`:
 
 Four jobs in `.github/workflows/ci.yml` run on push to `main`/`develop`/`copilot/**` and PRs to `main`/`develop`:
 
-1. **lint-and-format** – ESLint on server and client (continue-on-error, non-blocking)
+1. **lint-and-format** – ESLint on server (continue-on-error, non-blocking). Note: client has no `lint` script; the CI step uses `--if-present` so client lint is a no-op until configured.
 2. **test-backend** – PostgreSQL 15 service container, runs `cd server && npm test`
 3. **test-frontend** – `cd client && CI=true npm test -- --coverage --watchAll=false`
 4. **build** – `cd client && npm run build` (depends on test jobs passing)

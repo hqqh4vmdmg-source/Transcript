@@ -49,11 +49,11 @@ Create a detailed implementation plan for the requested change.
 
 5. **Define validation steps**:
    ```bash
-   cd server && npm run lint
-   cd server && node -e "require('./app')"
-   cd server && npm test
-   cd client && CI=true npm run build
-   cd client && CI=true npm test -- --watchAll=false
+   (cd server && npm run lint)
+   (cd server && node -e "require('./app')")
+   (cd server && npm test)
+   (cd client && CI=true npm run build)
+   (cd client && CI=true npm test -- --watchAll=false)
    ```
 
 ## Output Format
