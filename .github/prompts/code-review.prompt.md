@@ -50,9 +50,9 @@ Perform a thorough code review of the current changes.
 
 ### Validation Commands
 ```bash
-cd server && npm run lint
-cd server && node -e "require('./app')"
-cd server && npm test
-cd client && CI=true npm run build
-cd client && CI=true npm test -- --watchAll=false
+(cd server && npm run lint)
+(cd server && node -e "require('./app')")
+(cd server && npm test)
+(cd client && CI=true npm run build)
+(cd client && CI=true npm test -- --watchAll=false)
 ```

@@ -10,13 +10,13 @@ Perform a security audit of the codebase and dependencies.
 ## Dependency Audit
 ```bash
 # Check for known vulnerabilities
-cd server && npm audit
-cd ../client && npm audit
+(cd server && npm audit)
+(cd client && npm audit)
 npm audit  # Root dependencies
 
 # List outdated packages
-cd server && npm outdated
-cd ../client && npm outdated
+(cd server && npm outdated)
+(cd client && npm outdated)
 ```
 
 ## Code Security Checklist
@@ -59,8 +59,8 @@ cd ../client && npm outdated
 ## Search for Common Issues
 ```bash
 # Search for hard-coded secrets
-grep -rn "password\s*=" server/ --include="*.js" | grep -v node_modules | grep -v .env | grep -v test
-grep -rn "secret\s*=" server/ --include="*.js" | grep -v node_modules | grep -v .env | grep -v test
+grep -rn -E "password[[:space:]]*=" server/ --include="*.js" | grep -v node_modules | grep -v .env | grep -v test
+grep -rn -E "secret[[:space:]]*=" server/ --include="*.js" | grep -v node_modules | grep -v .env | grep -v test
 
 # Search for string concatenation in SQL
 grep -rn "query(\`" server/ --include="*.js" | grep -v node_modules

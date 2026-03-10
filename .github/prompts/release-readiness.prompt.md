@@ -55,8 +55,8 @@ Verify that the codebase is ready for a release.
 ## Run All Checks
 ```bash
 # From repo root
-cd server && npm run lint && node -e "require('./app')" && echo "Server OK"
-cd ../client && CI=true npm run build && CI=true npm test -- --watchAll=false && echo "Client OK"
-cd .. && npm run format:check && echo "Format OK"
+(cd server && npm run lint && node -e "require('./app')" && echo "Server OK")
+(cd client && CI=true npm run build && CI=true npm test -- --watchAll=false && echo "Client OK")
+npm run format:check && echo "Format OK"
 npm audit --production && echo "No critical vulnerabilities"
 ```

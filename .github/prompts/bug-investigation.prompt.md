@@ -33,14 +33,14 @@ Investigate and diagnose the reported bug in this Transcript Generator applicati
 
 5. **Run relevant tests**:
    ```bash
-   cd server && npx jest tests/<relevant-suite>.test.js
-   cd client && CI=true npx react-scripts test --watchAll=false --testPathPattern=<test-file>
+   (cd server && npx jest tests/<relevant-suite>.test.js)
+   (cd client && CI=true npx react-scripts test --watchAll=false --testPathPattern=<test-file>)
    ```
 
 6. **Verify the fix** — After implementing a fix:
-   - Run the full server test suite: `cd server && npm test`
-   - Run the client build: `cd client && CI=true npm run build`
-   - Run ESLint: `cd server && npm run lint`
+   - Run the full server test suite: `(cd server && npm test)`
+   - Run the client build: `(cd client && CI=true npm run build)`
+   - Run ESLint: `(cd server && npm run lint)`
 
 ## Common Bug Sources in This Codebase
 - Mismatched API endpoint paths between client services and server routes

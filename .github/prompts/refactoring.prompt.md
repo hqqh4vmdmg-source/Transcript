@@ -24,10 +24,10 @@ Plan and execute a refactoring of the specified code area.
 
 3. **Pre-refactoring baseline**:
    ```bash
-   cd server && npm run lint
-   cd server && npm test
-   cd client && CI=true npm test -- --watchAll=false
-   cd client && CI=true npm run build
+   (cd server && npm run lint)
+   (cd server && npm test)
+   (cd client && CI=true npm test -- --watchAll=false)
+   (cd client && CI=true npm run build)
    ```
    Record pass/fail counts and any pre-existing failures.
 
@@ -40,9 +40,9 @@ Plan and execute a refactoring of the specified code area.
 
 5. **Validate after each step**:
    ```bash
-   cd server && npm run lint
-   cd server && node -e "require('./app')"
-   cd server && npm test
+   (cd server && npm run lint)
+   (cd server && node -e "require('./app')")
+   (cd server && npm test)
    ```
 
 6. **Post-refactoring verification**:

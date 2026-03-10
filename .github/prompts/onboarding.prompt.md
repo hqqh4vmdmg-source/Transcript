@@ -17,12 +17,13 @@ Provide a comprehensive onboarding guide for a new developer joining this projec
 
 ### 2. Getting Started
 ```bash
-# Clone the repo
-git clone <repo-url> && cd Transcript
+# Clone the repo and cd into the cloned directory
+git clone <repo-url>
+cd <repo-dir>
 
 # Install dependencies
-cd server && PUPPETEER_SKIP_DOWNLOAD=true npm install
-cd ../client && npm install
+(cd server && PUPPETEER_SKIP_DOWNLOAD=true npm install)
+(cd client && npm install)
 
 # Set up environment
 cp server/.env.example server/.env

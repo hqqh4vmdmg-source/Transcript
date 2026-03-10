@@ -83,10 +83,10 @@ describe('ComponentName', () => {
 ## Running Tests
 ```bash
 # Server tests (requires PostgreSQL)
-cd server && npm test
-cd server && npx jest tests/<specific-file>.test.js --verbose
+(cd server && npm test)
+(cd server && npx jest tests/<specific-file>.test.js --verbose)
 
 # Client tests
-cd client && CI=true npm test -- --watchAll=false
-cd client && CI=true npx react-scripts test --testPathPattern=<test-file> --watchAll=false
+(cd client && CI=true npm test -- --watchAll=false)
+(cd client && CI=true npx react-scripts test --testPathPattern=<test-file> --watchAll=false)
 ```
