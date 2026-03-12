@@ -20,24 +20,21 @@ Before you begin, ensure you have the following installed:
    cd Transcript-Generator
    ```
 
-2. **Run the setup script**
+2. **Run the start script**
    ```bash
-   chmod +x setup.sh
-   ./setup.sh
+   chmod +x start.sh
+   ./start.sh
    ```
 
-   The script will:
-   - Create the PostgreSQL database
-   - Install all dependencies
-   - Set up environment variables
-   - Configure the application
+   The script does everything in one step:
+   - Installs all dependencies (root, server, client)
+   - Creates `server/.env` from the example template (if not already present)
+   - Creates the PostgreSQL database (if it does not already exist)
+   - Loads all database schema files in the correct order
+   - Creates required runtime directories
+   - Starts both the server and client
 
-3. **Start the application**
-   ```bash
-   npm run dev
-   ```
-
-4. **Access the application**
+3. **Access the application**
    - Open your browser and navigate to `http://localhost:3000`
    - The API server runs on `http://localhost:5000`
 
@@ -204,7 +201,10 @@ CLIENT_URL=http://localhost:3000
 ## Development Commands
 
 ```bash
-# Start both client and server
+# Full setup + start (installs deps, initialises DB, starts everything)
+npm start
+
+# Start both client and server (assumes setup already done)
 npm run dev
 
 # Start server only
